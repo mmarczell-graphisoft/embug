@@ -18,7 +18,7 @@ jobs:
         continue-on-error: true
         run: |
              echo "::group::This compilation correctly fails with boost not found"
-             em++ main.cpp
+             em++ main.cpp || true
              echo "::endgroup::"
              echo "::group::This compilation correctly succeeds with -sUSE_BOOST_HEADERS"
              em++ -sUSE_BOOST_HEADERS main.cpp
