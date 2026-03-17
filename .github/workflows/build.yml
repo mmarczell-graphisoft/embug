@@ -18,6 +18,6 @@ jobs:
         run: em++ main.cpp
         continue-on-error: true
       - name: Build 2
-        run: em++ -sUSE_BOOST main.cpp
+        run: em++ -sUSE_BOOST_HEADERS main.cpp
       - name: Build 3
         run: em++ main.cpp
