@@ -1,0 +1,23 @@
+name: Build
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup emsdk
+        uses: mymindstorm/setup-emsdk@v14
+        with:
+          version: 4.0.10
+      - name: Build 1
+        run: em++ main.cpp
+        continue-on-error: true
+      - name: Build 2
+        run: em++ -sUSE_BOOST main.cpp
+      - name: Build 3
+        run: em++ main.cpp
