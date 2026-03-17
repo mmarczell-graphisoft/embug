@@ -14,10 +14,15 @@ jobs:
         uses: mymindstorm/setup-emsdk@v14
         with:
           version: 4.0.10
-      - name: Build 1
-        run: em++ main.cpp
+      - name: Reproduce bug
         continue-on-error: true
-      - name: Build 2
-        run: em++ -sUSE_BOOST_HEADERS main.cpp
-      - name: Build 3
-        run: em++ main.cpp
+        run: |
+             echo "::group::This compilation correctly fails with boost not found"
+             em++ main.cpp
+             echo "::endgroup::"
+             echo "::group::This compilation correctly succeeds with -sUSE_BOOST_HEADERS"
+             em++ -sUSE_BOOST_HEADERS main.cpp
+             echo "::endgroup::"
+             echo "::group::This compilation incorrectly succeeds as USE_BOOST_HEADERS was not given"
+             em++ main.cpp
+             echo "::endgroup::"
